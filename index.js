@@ -22,9 +22,9 @@ function search(chars, length,ctx) {
       foundWords.push(word)
     }
   }
-
+  const uniqueWords = [...new Set(foundWords)];
   if (foundWords.length > 0) {
-    return String(foundWords);
+    return String(uniqueWords);
   } else {
     ctx.replyWithSticker(sticker['none']);
     return "not found!"

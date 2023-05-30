@@ -41,7 +41,7 @@ bot.on('message',async (ctx) =>{
     try{
         texts = ctx.message.text
         matches_text = await texts.match(/\p{L}/gui);
-        matches_digit = await texts.match(/\p{N}/gu);
+        matches_digit = await texts.match(/\p{N}/gui);
         console.log(matches_text.join(""),matches_digit.join(""))
         if (matches_text!=null && matches_digit!=null) {
             ctx.replyWithSticker(sticker['activation'])

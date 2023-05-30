@@ -1,2 +1,4 @@
 /node_modules
 .env
+main.py
+words_Russian.py

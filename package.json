@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodejs index.js"
+    "start": "nodejs index.js"
   },
   "author": " <Borukofu>",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "telegraf": "^4.12.2"
   }
 }

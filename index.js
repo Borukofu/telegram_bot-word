@@ -40,7 +40,7 @@ bot.start((ctx) => ctx.reply('Добро пожаливать в бота кот
 bot.on('message',async (ctx) =>{
     try{
         texts = ctx.message.text
-        matches_text = await texts.match(/\p{L}/gu);
+        matches_text = await texts.match(/\p{L}/gui);
         matches_digit = await texts.match(/\p{N}/gu);
         console.log(matches_text.join(""),matches_digit.join(""))
         if (matches_text!=null && matches_digit!=null) {

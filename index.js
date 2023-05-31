@@ -1,14 +1,12 @@
-console.log("starded...")
 const {Telegraf } = require("telegraf")
 const itertools = require('itertools')
 const words = require('./words_Russian')
 require('dotenv').config()
 const {TOKEN} = process.env
-let matches_text,matches_digit
 
+let matches_text,matches_digit
 const sticker = {
     "none":"CAACAgIAAxkBAANZZHYNidyc28P-VXvTfSVxeyfKyCUAAt8wAAKZ1ahLE_oF5Epyh28vBA",
-    "activation":"CAACAgIAAxkBAANSZHYKO_KyBsiMCvEVnDhKY_Dd_y8AAjsvAAK_TqlLioexq4CLvXMvBA"
 }
 
 function search(chars, length,ctx) {
@@ -30,23 +28,22 @@ function search(chars, length,ctx) {
     return "not found!"
   }
 }
-//console.log(search("ток",3))
 
 bot = new Telegraf(TOKEN)
-bot.start((ctx) => ctx.reply('Добро пожаливать в бота которий даёш мне букви я из них делаю слова (и длину слова из этих букв например(ток 3))'));
-//bot.on('message', async (ctx) => {
-//    await ctx.replyWithSticker(sticker['none']);
-//})
+bot.start((ctx) => ctx.reply('этот бот создан для игр про слова там где дают тебе буквы а из этих букв надо собрать слово длиной в 3 буквы'));
 bot.on('message',async (ctx) =>{
     try{
-        texts = ctx.message.text
+        texts = await ctx.message.text.toLowerCase()
+
         matches_text = await texts.match(/\p{L}/gui);
         matches_digit = await texts.match(/\p{N}/gui);
-        console.log(matches_text.join(""),matches_digit.join(""))
+
         if (matches_text!=null && matches_digit!=null) {
-            ctx.replyWithSticker(sticker['activation'])
-            setTimeout(()=>{ctx.reply(search(matches_text.join(""),matches_digit.join(""),ctx))},2500)
-    }}catch(err){
+            ctx.reply(search(matches_text.join(""),matches_digit.join(""),ctx))
+        }else{
+          ctx.replyWithSticker(sticker['none'])
+        }
+    }catch(err){
         console.error(err)
     }
 });

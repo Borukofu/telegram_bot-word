@@ -1,26 +1,26 @@
 const itertools = require('itertools')
 
 const words_ru = require('../speech/words_Russian')
-const words_en = require('../speech/english_words')
+const words_en = require('../speech/english_words');
 
 
-function search(chars, length,ctx) {
-    const letters = chars.split('');
-    const combinations = itertools.permutations(letters, length);
-    const foundWords = [];
-  
-    for (const combination of combinations) {
-      const word = combination.join('');
-      if (words_ru.includes(word)) {
-        foundWords.push(word)
-      }
-    }
-    const uniqueWords = [...new Set(foundWords)];
-    if (foundWords.length > 0) {
-      return String(uniqueWords);
-    } else {
-      ctx.replyWithSticker(sticker['none']);
-      return "not found!"
+function search(chars, length,callback,lang="ru") {
+  const letters = chars.split('');
+  const combinations = itertools.permutations(letters, length);
+  const foundWords = [];
+
+  for (const combination of combinations) {
+    const word = combination.join('');
+    let words = lang=="ru" ? words_ru : words_en
+    if (words.includes(word)) {
+      foundWords.push(word)
     }
   }
+
+  let uniqueWords = [...new Set(foundWords)];
+
+  uniqueWords = (uniqueWords.length>0)?uniqueWords = String(uniqueWords):uniqueWords = "not found!"
+ 
+  callback(uniqueWords)
+}
 module.exports = search

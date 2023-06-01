@@ -16,7 +16,7 @@ async function mesagge_on(ctx){
         for(i in dats){
             if(dats[i][0]==ctx.chat.id){
                 lang = dats[i][1]
-                console.log(i,dats,lang)
+            
             }
         }
         

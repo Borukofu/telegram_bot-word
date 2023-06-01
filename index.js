@@ -3,11 +3,7 @@ const bot_function = require('./function/bot')
 const text_and_sticker = require("./config/text_and_sticker")
 const data = require('./config/data')
 
-require('dotenv').config(
-  {
-    path:'./config/.env',
-  }
-)
+require('dotenv').config()
 
 const {TOKEN} = process.env
 bot = new Telegraf(TOKEN);
